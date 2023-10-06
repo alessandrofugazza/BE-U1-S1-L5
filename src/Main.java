@@ -45,6 +45,8 @@ public class Main {
                 System.out.println("Choose a format by typing the corresponding number and then press Enter.");
                 int mediaTypeChoice;
                 do {
+                    // uso do while true invece di while true cosi' si puo' evitare un controllo inutile nel caso il try funzioni
+                    // stessa cosa per i do while successivi
                     try {
                         mediaTypeChoice = Integer.parseInt(input.nextLine());
                         break;
@@ -99,7 +101,9 @@ public class Main {
                         break;
                     }
                 }
-            } else if (mediaType == MediaTypes.IMAGE) {  // controllo mediaType == MediaTypes.IMAGE per chiarezza di codice anche se non sarebbe necessario
+            } else if (mediaType == MediaTypes.IMAGE) {
+                // controllo mediaType == MediaTypes.IMAGE per chiarezza di codice anche se non sarebbe necessario
+                // stessa cosa per else if successivi
                 mediaElements[i] = new ImageElement(title);
             }
         }
@@ -120,7 +124,7 @@ public class Main {
             MultimediaElement selectedElement = mediaElements[selection-1];
             if (selectedElement instanceof ReproducibleElement) {
                 ((ReproducibleElement) selectedElement).play();
-            } else if (selectedElement instanceof ImageElement) { // controllo instanceof ImageElement per chiarezza di codice anche se non sarebbe necessario
+            } else if (selectedElement instanceof ImageElement) { 
                 ((ImageElement) selectedElement).show();
             }
         }
