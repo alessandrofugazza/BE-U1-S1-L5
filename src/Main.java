@@ -1,32 +1,135 @@
+/*
+ Ero cosi' preso dal codice che mi sono scordato di fare i commit!!
+ */
+
 import elements.*;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        AudioElement test = new AudioElement("ciao", 3);
-//        test.play();
-//        test.abbassaVolume();
-//        test.abbassaVolume();
-//        test.abbassaVolume();
-//        test.abbassaVolume();
-//        test.abbassaVolume();
-//        test.play();
-//        VideoElement test = new VideoElement("ciao", 3);
-//        test.play();
-//        test.diminuisciLuminosita();
-//        test.diminuisciLuminosita();
-//        test.diminuisciLuminosita();
-//        test.diminuisciLuminosita();
-//        test.play();
-        MultimediaElement[] arr = {
-                new AudioElement("audio test", 3),
-                new VideoElement("video test", 4),
-                new ImageElement("image test")
-        } ;
-        for (MultimediaElement element: arr) {
+        final byte numberOfElements = 5;
+        MultimediaElement[] mediaElements = new MultimediaElement[numberOfElements];
+        Scanner input = new Scanner(System.in);
+        for (byte i = 0; i < numberOfElements; i++) {
+            // switch case per selezionare suffisso da mettere successivamente in una stringa (-st, -nd, -rd, -th)
+            String ordinalIndicator;
+            switch ((i + 1) % 10) {
+                case (1): {
+                    ordinalIndicator = OrdinalIndicators.ST.toString().toLowerCase();
+                    break;
+                }
+                case (2): {
+                    ordinalIndicator = OrdinalIndicators.ND.toString().toLowerCase();
+                    break;
+                }
+                case (3): {
+                    ordinalIndicator = OrdinalIndicators.RD.toString().toLowerCase();
+                    break;
+                }
+                default: {
+                    ordinalIndicator = OrdinalIndicators.TH.toString().toLowerCase();
+                    break;
+                }
+            }
+
+            String title;
+            System.out.println("Insert the title of the " + (i + 1) + ordinalIndicator + " media element.");
+            do {
+                title = input.nextLine();
+            } while (title.equals(""));
+
+            MediaTypes mediaType = null;
+            do {
+                System.out.println("Available formats:\n\t1. Audio\n\t2. Video\n\t3. Image");
+                System.out.println("Choose a format by typing the corresponding number and then press Enter.");
+                int mediaTypeChoice;
+                do {
+                    try {
+                        mediaTypeChoice = Integer.parseInt(input.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please insert a number.");
+                    }
+                } while (true);
+
+                // switch case con enum per interpretare l'input dell'utente, in modo da aumentare leggibilita' del codice e solidita' del programma
+                switch (mediaTypeChoice) {
+                    case (1): {
+                        mediaType = MediaTypes.AUDIO;
+                        break;
+                    }
+                    case (2): {
+                        mediaType = MediaTypes.VIDEO;
+                        break;
+                    }
+                    case (3): {
+                        mediaType = MediaTypes.IMAGE;
+                        break;
+                    }
+                    default: {
+                        System.out.println("Invalid format selection.");
+                    }
+                }
+            } while (mediaType == null);
+
+            if (mediaType == MediaTypes.AUDIO || mediaType == MediaTypes.VIDEO) {
+                int length;
+                System.out.println("Please insert its duration in minutes:");
+                do {
+                    try {
+                        length = Integer.parseInt(input.nextLine());
+                        if (length < 1) {
+                            System.out.println("Please insert a number greater than 0.");
+                        } else {
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please insert a number.");
+                    }
+                } while (true);
+
+                switch (mediaType) {
+                    case AUDIO: {
+                        mediaElements[i] = new AudioElement(title, length);
+                        break;
+                    }
+                    case VIDEO: {
+                        mediaElements[i] = new VideoElement(title, length);
+                        break;
+                    }
+                }
+            } else if (mediaType == MediaTypes.IMAGE) {  // controllo mediaType == MediaTypes.IMAGE per chiarezza di codice anche se non sarebbe necessario
+                mediaElements[i] = new ImageElement(title);
+            }
+        }
+
+        for (MultimediaElement element : mediaElements) {
             if (element instanceof ReproducibleElement) {
                 ((ReproducibleElement) element).play();
             } else if (element instanceof ImageElement) { // controllo instanceof ImageElement per chiarezza di codice anche se non sarebbe necessario
                 ((ImageElement) element).show();
+            }
+        }
+
+        System.out.println("------------------------------------------");
+        byte selection;
+        while (true) {
+            System.out.println("Select a media element from 1 to " + numberOfElements + ". Enter 0 to close the player.");
+            for (int i = 0; i < mediaElements.length; i++) {
+                System.out.println((i+1) + ". " + mediaElements[i].getTitle());
+            }
+            selection = input.nextByte();
+            if (selection == 0) {
+                System.out.println("Thanks for using our media player.");
+                input.close();
+                break;
+            }
+            MultimediaElement selectedElement = mediaElements[selection-1];
+            if (selectedElement instanceof ReproducibleElement) {
+                ((ReproducibleElement) selectedElement).play();
+            } else if (selectedElement instanceof ImageElement) { // controllo instanceof ImageElement per chiarezza di codice anche se non sarebbe necessario
+                ((ImageElement) selectedElement).show();
             }
         }
     }

@@ -2,12 +2,9 @@ package elements;
 
 public class AudioElement extends ReproducibleElement {
 
-
     public AudioElement (String title, int length) {
         super(title, length);
     }
-
-
 
     public void play() {
         String exclamationMarks = "";
