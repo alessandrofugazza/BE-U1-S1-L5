@@ -24,6 +24,7 @@ public class VideoElement extends ReproducibleElement implements Brightness {
         }
     }
 
+    @Override
     public void play() {
         String exclamationMarks = "";
         for (int i = 0; i < this.volume; i++) {
