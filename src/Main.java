@@ -104,14 +104,6 @@ public class Main {
             }
         }
 
-        for (MultimediaElement element : mediaElements) {
-            if (element instanceof ReproducibleElement) {
-                ((ReproducibleElement) element).play();
-            } else if (element instanceof ImageElement) { // controllo instanceof ImageElement per chiarezza di codice anche se non sarebbe necessario
-                ((ImageElement) element).show();
-            }
-        }
-
         System.out.println("------------------------------------------");
         byte selection;
         while (true) {
