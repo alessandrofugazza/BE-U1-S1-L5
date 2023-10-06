@@ -1,17 +1,13 @@
+package elements;
+
 public class AudioElement extends ReproducibleElement {
-    private int volume = 10;
+
 
     public AudioElement (String title, int length) {
         super(title, length);
     }
 
-    public void abbassaVolume() {
 
-    }
-
-    public void alzaVolume() {
-
-    }
 
     public void play() {
         String exclamationMarks = "";

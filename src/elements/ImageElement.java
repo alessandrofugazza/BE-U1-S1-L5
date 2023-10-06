@@ -1,0 +1,33 @@
+package elements;
+
+public class ImageElement extends MultimediaElement implements Brightness {
+    private int brightness = 10;
+
+    public ImageElement (String title) {
+        super(title);
+    }
+
+    public void aumentaLuminosita() {
+        if (this.brightness == MAX_BRIGHTNESS) {
+            System.out.println("Brightness already at minimum.");
+        } else {
+            this.brightness += 1;
+        }
+    }
+
+    public void diminuisciLuminosita() {
+        if (this.brightness == MIN_BRIGHTNESS) {
+            System.out.println("Brightness already at minimum.");
+        } else {
+            this.brightness -= 1;
+        }
+    }
+
+    public void show() {
+        String asterisks = "";
+        for (int i = 0; i < this.brightness; i++) {
+            asterisks+="*";
+        }
+        System.out.println(this.title + asterisks);
+    }
+}
