@@ -2,12 +2,14 @@ package elements;
 
 public class VideoElement extends ReproducibleElement implements Brightness {
     private int brightness = 10;
+    final private int minBrightness = 0;
+    final private int maxBrightness = 10;
     public VideoElement (String title, int length) {
         super(title, length);
     }
 
     public void aumentaLuminosita() {
-        if (this.brightness == MAX_BRIGHTNESS) {
+        if (this.brightness == maxBrightness) {
             System.out.println("Brightness already at minimum.");
         } else {
             this.brightness += 1;
@@ -15,7 +17,7 @@ public class VideoElement extends ReproducibleElement implements Brightness {
     }
 
     public void diminuisciLuminosita() {
-        if (this.brightness == MIN_BRIGHTNESS) {
+        if (this.brightness == minBrightness) {
             System.out.println("Brightness already at minimum.");
         } else {
             this.brightness -= 1;
