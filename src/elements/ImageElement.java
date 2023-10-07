@@ -1,6 +1,6 @@
 package elements;
 
-public class ImageElement extends MultimediaElement implements Brightness {
+public class ImageElement extends MultimediaElement implements HasBrightness {
     private int brightness = 10;
     final private int minBrightness = 0;
     final private int maxBrightness = 10;

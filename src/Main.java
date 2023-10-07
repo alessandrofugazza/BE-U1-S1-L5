@@ -124,7 +124,7 @@ public class Main {
             MultimediaElement selectedElement = mediaElements[selection-1];
             if (selectedElement instanceof ReproducibleElement) {
                 ((ReproducibleElement) selectedElement).play();
-            } else if (selectedElement instanceof ImageElement) { 
+            } else if (selectedElement instanceof ImageElement) {
                 ((ImageElement) selectedElement).show();
             }
         }

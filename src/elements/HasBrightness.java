@@ -1,6 +1,6 @@
 package elements;
 
-public interface Brightness {
+public interface HasBrightness {
     public void aumentaLuminosita();
     public void diminuisciLuminosita();
 }

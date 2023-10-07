@@ -1,6 +1,6 @@
 package elements;
 
-public class VideoElement extends ReproducibleElement implements Brightness {
+public class VideoElement extends ReproducibleElement implements HasBrightness {
     private int brightness = 10;
     final private int minBrightness = 0;
     final private int maxBrightness = 10;
